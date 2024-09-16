@@ -17,10 +17,10 @@ library(janitor)
 raw_fire_data <- read.csv("data/raw/toronto_fire_incidents.csv")
 
 cleaned_fire_data <-
-  raw_fire_data |> 
+  raw_fire_data |>
   janitor::clean_names()
 
-selected_cleaned_fire_data <- 
+selected_cleaned_fire_data <-
   cleaned_fire_data |>
   select(
     area_of_origin,
@@ -41,24 +41,38 @@ selected_cleaned_fire_data <-
 # Replace multiple specific values with NA
 selected_cleaned_fire_data <- selected_cleaned_fire_data %>%
   mutate(across(everything(), ~ na_if(., ""))) %>%
-  mutate(across(everything(), ~ na_if(., "99 - Undetermined  (formerly 98)"))) %>%
+  mutate(across(everything(), ~ na_if(
+    ., "99 - Undetermined  (formerly 98)"
+  ))) %>%
   mutate(across(everything(), ~ na_if(., "990 - Under Investigation"))) %>%
   mutate(across(everything(), ~ na_if(., "97 - Other - unclassified"))) %>%
   mutate(across(everything(), ~ na_if(., "99 - Undetermined"))) %>%
   mutate(across(everything(), ~ na_if(., "9 - Undetermined"))) %>%
-  mutate(across(everything(), ~ na_if(., "8 - Not applicable (bldg not classified by OBC OR detached/semi/town home)"))) %>%
+  mutate(across(everything(), ~ na_if(
+    .,
+    "8 - Not applicable (bldg not classified by OBC OR detached/semi/town home)"
+  ))) %>%
   mutate(across(everything(), ~ na_if(., "999 - Undetermined"))) %>%
   mutate(across(everything(), ~ na_if(., "9990 - Under Investigation"))) %>%
   mutate(across(everything(), ~ na_if(., "98 - Other"))) %>%
-  mutate(across(everything(), ~ na_if(., "9 - Floor/suite of fire origin: Smoke alarm presence undetermined"))) %>%
-  mutate(across(everything(), ~ na_if(., "9 - Smoke alarm presence undetermined"))) %>%
-  mutate(across(everything(), ~ na_if(., "9 - Activation/operation undetermined")))
+  mutate(across(everything(), ~ na_if(
+    ., "9 - Floor/suite of fire origin: Smoke alarm presence undetermined"
+  ))) %>%
+  mutate(across(everything(), ~ na_if(
+    ., "9 - Smoke alarm presence undetermined                       "
+  ))) %>%
+  mutate(across(everything(), ~ na_if(
+    ., "9 - Activation/operation undetermined"
+  )))
 
-# Convert columns 'civilian_casualties' and 'estimated_dollar_loss' back to numeric
+# Convert columns 'civilian_casualties'
+# and 'estimated_dollar_loss' back to numeric
 selected_cleaned_fire_data <- selected_cleaned_fire_data %>%
-  mutate(civilian_casualties = as.numeric(civilian_casualties),
-         estimated_dollar_loss = as.numeric(estimated_dollar_loss)) %>%
-  drop_na()  # Remove rows with NA values
+  mutate(
+    civilian_casualties = as.numeric(civilian_casualties),
+    estimated_dollar_loss = as.numeric(estimated_dollar_loss)
+  ) %>%
+  drop_na() # Remove rows with NA values
 
 # Preview the cleaned data
 head(selected_cleaned_fire_data)
