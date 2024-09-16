@@ -83,20 +83,24 @@ head(selected_cleaned_fire_data)
 # Convert str to factor
 selected_cleaned_fire_data <-
   selected_cleaned_fire_data %>%
-    mutate_at(vars(area_of_origin, extent_of_fire, 
-      fire_alarm_system_presence, ignition_source, 
-      smoke_alarm_at_fire_origin, sprinkler_system_operation), as.factor)
+  mutate_at(vars(
+    area_of_origin, extent_of_fire,
+    fire_alarm_system_presence, ignition_source,
+    smoke_alarm_at_fire_origin, sprinkler_system_operation
+  ), as.factor)
 
-#Convert time
-selected_cleaned_fire_data$tfs_alarm_time <- 
+# Convert time
+selected_cleaned_fire_data$tfs_alarm_time <-
   ymd_hms(selected_cleaned_fire_data$tfs_alarm_time)
-selected_cleaned_fire_data$tfs_arrival_time <- 
+selected_cleaned_fire_data$tfs_arrival_time <-
   ymd_hms(selected_cleaned_fire_data$tfs_arrival_time)
 
 # Calculate the time difference in minutes
-selected_cleaned_fire_data$time_diff <- 
-  difftime(selected_cleaned_fire_data$tfs_arrival_time, 
-    selected_cleaned_fire_data$tfs_alarm_time, units = "mins")
+selected_cleaned_fire_data$time_diff <-
+  difftime(selected_cleaned_fire_data$tfs_arrival_time,
+    selected_cleaned_fire_data$tfs_alarm_time,
+    units = "mins"
+  )
 
 # Write the cleaned data to a new csv
 write.csv(
