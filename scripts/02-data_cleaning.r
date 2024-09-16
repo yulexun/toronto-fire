@@ -66,6 +66,9 @@ selected_cleaned_fire_data <- selected_cleaned_fire_data %>%
   mutate(across(everything(), ~ na_if(
     ., "9 - Smoke alarm presence undetermined                       "
   ))) %>%
+    mutate(across(everything(), ~ na_if(
+      ., "9 - Smoke alarm presence undetermined"
+    ))) %>%
   mutate(across(everything(), ~ na_if(
     ., "9 - Activation/operation undetermined"
   )))
@@ -82,14 +85,14 @@ selected_cleaned_fire_data <- selected_cleaned_fire_data %>%
 # Preview the cleaned data
 head(selected_cleaned_fire_data)
 
-# Convert str to factor
-selected_cleaned_fire_data <-
-  selected_cleaned_fire_data %>%
-  mutate_at(vars(
-    area_of_origin, extent_of_fire,
-    fire_alarm_system_presence, ignition_source,
-    smoke_alarm_at_fire_origin, sprinkler_system_operation
-  ), as.factor)
+# # Convert str to factor
+# selected_cleaned_fire_data <-
+#   selected_cleaned_fire_data %>%
+#   mutate_at(vars(
+#     area_of_origin, extent_of_fire,
+#     fire_alarm_system_presence, ignition_source,
+#     smoke_alarm_at_fire_origin, sprinkler_system_operation
+#   ), as.factor)
 
 # Convert time
 selected_cleaned_fire_data$tfs_alarm_time <-
@@ -104,7 +107,66 @@ selected_cleaned_fire_data$time_diff <-
     units = "mins"
   )
 
+# Simplify the presence and operation of fie alarm system,
+# smoke detector and sprinkler system
+selected_cleaned_fire_data_simple <-
+  selected_cleaned_fire_data |>
+  mutate(
+    smoke_alarm_at_fire_origin =
+      case_match(
+        smoke_alarm_at_fire_origin,
+        "2 - Floor/suite of fire origin: Smoke alarm present and operated" 
+          ~ "PO",
+        "1 - Floor/suite of fire origin: No smoke alarm" ~ "N",
+        "2 - Smoke alarm present and operated" ~ "PO",
+        "1 - No smoke alarm" ~ "N",
+        "3 - Floor/suite of fire origin: Smoke alarm present did not operate" 
+          ~ "P",
+        "4 - Floor/suite of fire origin: Smoke alarm present, operation undetermined" ~ "P",
+        "4 - Smoke alarm present, operation undetermined" ~ "P"
+      )
+  )
+
+  selected_cleaned_fire_data_simple <-
+    selected_cleaned_fire_data |>
+    mutate(
+      sprinkler_system_operation =
+        case_match(
+          sprinkler_system_operation,
+          "1 - Sprinkler system activated" 
+            ~ "PO",
+          "8 - Not applicable - no sprinkler system present" ~ "N",
+          "3 - Did not activate: fire too small to trigger system" 
+            ~ "P",
+          "2 - Did not activate: remote from fire" 
+            ~ "P",
+          "5 - Did not activate: reason unknown" 
+            ~ "P",          
+          "4 - Other reason for non activation/operation"
+            ~ "P",          
+        )
+    )
+
+    selected_cleaned_fire_data_simple <-
+      selected_cleaned_fire_data |>
+      mutate(
+        fire_alarm_system_presence =
+          case_match(
+            fire_alarm_system_presence,
+            "2 - No Fire alarm system" ~ "N",
+            "1 -  Fire alarm system present" 
+              ~ "P",
+
+          )
+      )
+
+
 # Write the cleaned data to a new csv
+write_csv(
+  x = selected_cleaned_fire_data_simple,
+  file = "data/analysis/cleaned_fire_data_simple.csv"
+)
+
 write_csv(
   x = selected_cleaned_fire_data,
   file = "data/analysis/cleaned_fire_data.csv"
