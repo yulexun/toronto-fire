@@ -18,7 +18,7 @@ toronto_fire <-
   filter(name == "Fire Incidents Data.csv") |>
   get_resource()
 
-write.csv(
+write_csv(
   x = toronto_fire,
   file = "data/raw/toronto_fire_incidents.csv"
 )

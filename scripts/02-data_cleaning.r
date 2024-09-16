@@ -13,9 +13,11 @@
 library(tidyverse)
 library(janitor)
 library(lubridate)
+library(readr)
+
 
 #### Data Cleaning ####
-raw_fire_data <- read.csv("data/raw/toronto_fire_incidents.csv")
+raw_fire_data <- read_csv("data/raw/toronto_fire_incidents.csv")
 
 cleaned_fire_data <-
   raw_fire_data |>
@@ -103,7 +105,7 @@ selected_cleaned_fire_data$time_diff <-
   )
 
 # Write the cleaned data to a new csv
-write.csv(
+write_csv(
   x = selected_cleaned_fire_data,
   file = "data/analysis/cleaned_fire_data.csv"
 )
