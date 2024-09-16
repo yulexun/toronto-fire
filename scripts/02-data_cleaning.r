@@ -23,6 +23,8 @@ cleaned_fire_data <-
 selected_cleaned_fire_data <-
   cleaned_fire_data |>
   select(
+    tfs_alarm_time,
+    tfs_arrival_time,
     area_of_origin,
     civilian_casualties,
     estimated_dollar_loss,
