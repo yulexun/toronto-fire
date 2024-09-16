@@ -101,5 +101,5 @@ selected_cleaned_fire_data$time_diff <-
 # Write the cleaned data to a new csv
 write.csv(
   x = selected_cleaned_fire_data,
-  file = "data/analyzed/cleaned_fire_data.csv"
+  file = "data/analysis/cleaned_fire_data.csv"
 )
