@@ -15,21 +15,21 @@ library(opendatatoronto)
 library(dplyr)
  
 # get package
-toronto_beach_temp <-
+toronto_fire <-
   # Each package is associated with a unique id  found in the "For 
   # Developers" tab of the relevant page from Open Data Toronto
   # https://open.toronto.ca/dataset/daily-shelter-overnight-service-occupancy-capacity/
-  list_package_resources("toronto-beaches-observations") |>
+  list_package_resources("64a26694-01dc-4ec3-aa87-ad8509604f50") |>
   # Within that package, we are interested in the 2021 dataset
   filter(name == 
-    "toronto-beaches-observations.csv") |>
+    "Fire Incidents Data.csv") |>
   # Having reduced the dataset to one row we can get the resource
   get_resource()
 
 write.csv(
-  x = toronto_beach_temp,
-  file = "data/raw/toronto_beach_temp.csv"
+  x = toronto_fire,
+  file = "data/raw/toronto_fire_incidents.csv"
 )
 
-head(toronto_beach_temp)
+head(toronto_fire)
 
