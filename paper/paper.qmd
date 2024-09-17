@@ -8,12 +8,40 @@ date: today
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
+toc: true
 number-sections: true
 bibliography: bibliography.bib
 ---
 
-# Introduction
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+#### Workspace setup ####
+library(tidyverse)
+library(tinytex)
+library(dplyr)
+library(tibble)
+library(opendatatoronto)
+library(janitor)
+library(ggplot2)
+library(knitr)
+library(here)
+
+# # Set the number of decimal places to 2 for all subsequent figures and tables.
+# options(digits = 2)
+
+
+# Read data, https://stackoverflow.com/questions/78894145/quarto-document-not-seeing-project-directory-for-targets-data-functions-or-scr
+raw_lead_data <- read_csv(here("data/raw/toronto_fire_incidents.csv"))
+cleaned_data <- read_csv(here("data/analysis/cleaned_fire_data_simple.csv"))
+```
+
+
+# Introduction {#sec-intro}
 This project uses @citeR.
 
 
+\newpage
 # Bibliography
