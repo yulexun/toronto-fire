@@ -11,6 +11,7 @@
 #### Workspace setup ####
 library(opendatatoronto)
 library(dplyr)
+library(readr)
 
 #### Download data ####
 toronto_fire <-
