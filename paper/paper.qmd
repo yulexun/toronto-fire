@@ -1,0 +1,19 @@
+---
+title: "My title"
+subtitle: "My subtitle if needed"
+author: 
+  - Lexun Yu
+thanks: "Code and data are available at: [https://github.com/yulexun/toronto-fire](https://github.com/yulexun/toronto-fire)."
+date: today
+date-format: long
+abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+format: pdf
+number-sections: true
+bibliography: bibliography.bib
+---
+
+# Introduction
+This project uses @citeR.
+
+
+# Bibliography
