@@ -25,7 +25,7 @@ alarm_times <- sample(seq(ymd_hms("2018-01-01 00:00:00"),
 time_diff <- runif(n, min = 2, max = 10)
 
 # Calculate arrival times based on alarm times and time difference
-arrival_times <- alarm_times + time_diff
+arrival_times <- alarm_times + time_diff * 60
 
 # Simulate categorical columns
 area_of_origin <- sample(c(
