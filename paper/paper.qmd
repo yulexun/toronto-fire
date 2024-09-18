@@ -40,8 +40,14 @@ cleaned_data <- read_csv(here("data/analysis/cleaned_fire_data_simple.csv"))
 
 
 # Introduction {#sec-intro}
-This project uses @citeR.
+The urban fire hazard is one of the most pressing issues in this context, especially in Canada where cities are dealing with such issues like climate, facilities or population density.As of July 1 2023, the population in urban area in Canada reached 33,812,133 [@statsCanada]. 
+Not only do fires in highly populated regions result in heavy losses in terms of property, but also, in the contest of people and the environment, the consequences are enormous. Also, urban fires are resources-dependent and require attention from city services and emergency services, thus indicating the need for prevention, action and planning based on risk assessment. With such issues in mind, the knowledge of urban fire hazards in Canadian cities is needed for creating policies that address public safety and increase urban resilience.
 
+In Canada, articles about fire incidents has a focus on wildfire. For instance, @Goemans2012 discuss the fire mitigation plan during the 2003 wildfire at Kelowna, British Columbia, while @Mamuji2018 talk about the evacuation during the Fort McMurray wildfire in Alberta. The researches conducted about urban fire incidents are done in other parts of the world such as East Asia. @MasoodRafi2012 research the nature and level of this threat. They conclude that the lack of training in fire department, shortage of facilities and infrastructure the major issues in Pakistan. The research by @HariMurti2023 in Semarang City also emphasize the importance of community understanding and the installation of fire protection facilities. This article uses the data provided by opendatatoronto library [@opendatatoronto] in order to analyze fire occurrences in the city of Toronto, which is an important research gap in the study of fire incidents in America. This study seeks to provide a deeper understanding of fire patterns to improve fire prevention and emergency response strategies.
+
+In this paper we visualize Toronto's Fire Incidents' data.
+
+This project uses @citeR.
 
 \newpage
 # Bibliography
