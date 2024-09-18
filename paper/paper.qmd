@@ -29,7 +29,9 @@ library(ggplot2)
 library(knitr)
 library(here)
 
-# # Set the number of decimal places to 2 for all subsequent figures and tables.
+
+# # Set the number of decimal places to 2 for all subsequent figures and tables. 
+# # https://github.com/AbbassSleiman/Lead-Concentrations/blob/main/outputs/paper/lead_concentration.qmd
 # options(digits = 2)
 
 
