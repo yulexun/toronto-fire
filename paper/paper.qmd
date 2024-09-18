@@ -34,7 +34,7 @@ library(here)
 
 
 # Read data, https://stackoverflow.com/questions/78894145/quarto-document-not-seeing-project-directory-for-targets-data-functions-or-scr
-raw_lead_data <- read_csv(here("data/raw/toronto_fire_incidents.csv"))
+raw_data <- read_csv(here("data/raw/toronto_fire_incidents.csv"))
 cleaned_data <- read_csv(here("data/analysis/cleaned_fire_data_simple.csv"))
 ```
 
