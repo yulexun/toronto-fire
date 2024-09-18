@@ -161,6 +161,28 @@ cleaned_fire_data_simple <-
       )
   )
 
+# keep only the indicator number of area_of_origin,
+# extent of fire and ignition source
+cleaned_fire_data_simple <-
+  cleaned_fire_data_simple |>
+  mutate(
+    area_of_origin =
+      substr(area_of_origin, start = 1, stop = 2)
+  )
+
+cleaned_fire_data_simple <-
+  cleaned_fire_data_simple |>
+  mutate(
+    extent_of_fire =
+      substr(extent_of_fire, start = 1, stop = 2)
+  )
+
+cleaned_fire_data_simple <-
+  cleaned_fire_data_simple |>
+  mutate(
+    ignition_source =
+      substr(ignition_source, start = 1, stop = 2)
+  )
 
 # Write the cleaned data to a new csv
 write_csv(

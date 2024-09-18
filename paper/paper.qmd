@@ -56,6 +56,8 @@ cleaned_data_cat <-
     smoke_alarm_at_fire_origin, 
     sprinkler_system_operation
   )
+
+legend <- read.csv(here("data/legend.txt"), header = TRUE, stringsAsFactors = FALSE)
 ```
 
 
@@ -70,9 +72,23 @@ In this paper we visualize Toronto's Fire Incidents' data.
 # Data
 
 ## Raw Data
-This project uses @citeR, @opendatatoronto, @knitr, @tidyverse, @ggplot2
+This project uses @citeR, @opendatatoronto, @knitr, @tidyverse, @ggplot2, @dplyr
 
 ## Cleaned Data
+
+```{r}
+#| echo: false
+#| 
+# Convert str to factor
+
+cleaned_data_cat <-
+  cleaned_data_cat %>%
+  mutate_at(vars(
+    area_of_origin,
+    fire_alarm_system_presence, ignition_source,
+    smoke_alarm_at_fire_origin, sprinkler_system_operation
+  ), as.factor)
+```
 
 ```{r}
 #| label: table-clean-tfs
@@ -99,6 +115,32 @@ head(cleaned_data_cat, 5) |>
 cat("Note: 'PO' = System present, \n'N' = System not present, \n'P' = System present but not operated")
 ```
 
+\newpage
+
+\appendix
+
+# Appendix {#sec-appendix}
+
+## Graph of areas of origin of fire incidents by number of occurrences {#sec-origin-fig}
+```{r, fig.width=10,fig.height=11}
+#| label: fig-origin
+#| fig-cap: Areas of origin of fire incidents by number of occurrences
+#| echo: false
+
+cleaned_data_cat |>
+  count(area_of_origin) |>
+  ggplot(mapping = aes(x = n, y = area_of_origin)) +
+  geom_col() + 
+  theme_minimal() + 
+  labs(x = "number of observation", y = "area of origin")
+
+cat("Index of 'Area of Origin':")
+cat(legend$x, sep = "\n")
+```
+
+# Attribution Statement
+Contains information licensed under the Open Government Licence – Toronto. 
+Visit: [https://open.toronto.ca/open-data-license/](https://open.toronto.ca/open-data-license/)
 
 \newpage
 # Bibliography
