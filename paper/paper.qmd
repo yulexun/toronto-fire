@@ -38,6 +38,24 @@ library(here)
 # Read data, https://stackoverflow.com/questions/78894145/quarto-document-not-seeing-project-directory-for-targets-data-functions-or-scr
 raw_data <- read_csv(here("data/raw/toronto_fire_incidents.csv"))
 cleaned_data <- read_csv(here("data/analysis/cleaned_fire_data_simple.csv"))
+cleaned_data_tfs <-
+  cleaned_data |>
+  select(
+    tfs_alarm_time, 
+    tfs_arrival_time, 
+    time_diff,
+    civilian_casualties, 
+    estimated_dollar_loss,
+  )
+cleaned_data_cat <-
+  cleaned_data |>
+  select(
+    area_of_origin, 
+    ignition_source, 
+    fire_alarm_system_presence, 
+    smoke_alarm_at_fire_origin, 
+    sprinkler_system_operation
+  )
 ```
 
 
@@ -49,7 +67,38 @@ In Canada, articles about fire incidents has a focus on wildfire. For instance, 
 
 In this paper we visualize Toronto's Fire Incidents' data. 
 
-This project uses @citeR.
+# Data
+
+## Raw Data
+This project uses @citeR, @opendatatoronto, @knitr, @tidyverse, @ggplot2
+
+## Cleaned Data
+
+```{r}
+#| label: table-clean-tfs
+#| tbl-cap: Top rows of cleaned Toronto Fire Service response time and loss data
+#| echo: false
+
+head(cleaned_data_tfs, 5) |>
+  kable(
+    col.names = c("Alarm Time", "TFS Arrival Time", "TFS Response Time"
+    , "Civilian Casualties", "Estimated Loss in Dollar"),
+      )
+```
+
+```{r}
+#| label: table-clean-cat
+#| tbl-cap: Top rows of cleaned data showing Area of Origin, Ignition source and Fire, Smoke, Sprnkler System Presence.
+#| echo: false
+
+head(cleaned_data_cat, 5) |>
+  kable(
+    col.names = c("Area of Origin", "Ignition Source", "Fire Alarm Status"
+    , "Smoke Alarm Status", "Sprinkler System Status"),
+      )
+cat("Note: 'PO' = System present, \n'N' = System not present, \n'P' = System present but not operated")
+```
+
 
 \newpage
 # Bibliography
