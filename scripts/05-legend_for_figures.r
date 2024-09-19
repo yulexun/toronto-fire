@@ -14,5 +14,13 @@ data <-
   unique() |>
   sort.default()
 
-write.table(data, file = "data/legend.txt", sep = "\n",
+write.table(data, file = "data/legend/area_of_origin.txt", sep = "\n",
+            row.names = FALSE)
+
+data <- 
+  cleaned_data$ignition_source |>
+  unique() |>
+  sort.default()
+
+write.table(data, file = "data/legend/ignition_source.txt", sep = "\n",
             row.names = FALSE)

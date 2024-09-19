@@ -47,9 +47,11 @@ cleaned_data_tfs <-
     civilian_casualties, 
     estimated_dollar_loss,
   )
+  
 cleaned_data_cat <-
   cleaned_data |>
   select(
+    estimated_dollar_loss,
     area_of_origin, 
     ignition_source, 
     fire_alarm_system_presence, 
@@ -57,28 +59,12 @@ cleaned_data_cat <-
     sprinkler_system_operation
   )
 
-legend <- read.csv(here("data/legend.txt"), header = TRUE, stringsAsFactors = FALSE)
+legend_origin <- read.csv(here("data/legend/area_of_origin.txt"), header = TRUE, stringsAsFactors = FALSE)
+legend_source <- read.csv(here("data/legend/ignition_source.txt"), header = TRUE, stringsAsFactors = FALSE)
 ```
-
-
-# Introduction {#sec-intro}
-The urban fire hazard is one of the most pressing issues in this context, especially in Canada where cities are dealing with such issues like climate, facilities or population density.As of July 1 2023, the population in urban area in Canada reached 33,812,133 [@statsCanada]. 
-Not only do fires in highly populated regions result in heavy losses in terms of property, but also, in the contest of people and the environment, the consequences are enormous. Also, urban fires are resources-dependent and require attention from city services and emergency services, thus indicating the need for prevention, action and planning based on risk assessment. With such issues in mind, the knowledge of urban fire hazards in Canadian cities is needed for creating policies that address public safety and increase urban resilience.
-
-In Canada, articles about fire incidents has a focus on wildfire. For instance, @Goemans2012 discuss the fire mitigation plan during the 2003 wildfire at Kelowna, British Columbia, while @Mamuji2018 talk about the evacuation during the Fort McMurray wildfire in Alberta. The researches conducted about urban fire incidents are done in other parts of the world such as East Asia. @MasoodRafi2012 research the nature and level of this threat. They conclude that the lack of training in fire department, shortage of facilities and infrastructure the major issues in Pakistan. The research by @HariMurti2023 in Semarang City also emphasize the importance of community understanding and the installation of fire protection facilities. This article uses the data provided by opendatatoronto library [@opendatatoronto] in order to analyze fire occurrences in the city of Toronto, which is an important research gap in the study of fire incidents in America. This study seeks to provide a deeper understanding of fire patterns to improve fire prevention and emergency response strategies.
-
-In this paper we visualize Toronto's Fire Incidents' data. 
-
-# Data
-
-## Raw Data
-This project uses @citeR, @opendatatoronto, @knitr, @tidyverse, @ggplot2, @dplyr
-
-## Cleaned Data
 
 ```{r}
 #| echo: false
-#| 
 # Convert str to factor
 
 cleaned_data_cat <-
@@ -90,8 +76,27 @@ cleaned_data_cat <-
   ), as.factor)
 ```
 
+# Introduction {#sec-intro}
+The urban fire hazard is one of the most pressing issues in this context, especially in Canada where cities are dealing with such issues like climate, facilities or population density.As of July 1 2023, the population in urban area in Canada reached 33,812,133 [@statsCanada]. 
+Not only do fires in highly populated regions result in heavy losses in terms of property, but also, in the contest of people and the environment, the consequences are enormous. Also, urban fires are resources-dependent and require attention from city services and emergency services, thus indicating the need for prevention, action and planning based on risk assessment. With such issues in mind, the knowledge of urban fire hazards in Canadian cities is needed for creating policies that address public safety and increase urban resilience.
+
+In Canada, articles about fire incidents has a focus on wildfire. For instance, @Goemans2012 discuss the fire mitigation plan during the 2003 wildfire at Kelowna, British Columbia, while @Mamuji2018 talk about the evacuation during the Fort McMurray wildfire in Alberta. The researches conducted about urban fire incidents are done in other parts of the world such as East Asia. @MasoodRafi2012 research the nature and level of this threat. They conclude that the lack of training in fire department, shortage of facilities and infrastructure the major issues in Pakistan. The research by @HariMurti2023 in Semarang City also emphasize the importance of community understanding and the installation of fire protection facilities. This article uses the data provided by opendatatoronto library [@opendatatoronto] in order to analyze fire occurrences in the city of Toronto, which is an important research gap in the study of fire incidents in America. This study seeks to provide a deeper understanding of fire patterns to improve fire prevention and emergency response strategies.
+
+In this paper we visualize Toronto's Fire Incidents data. 
+
+# Data
+
+## Overview {#sec-data-overview}
+
+<!-- Referenced https://github.com/AbbassSleiman/Lead-Concentrations/blob/main/outputs/paper/lead_concentration.pdf for formatting. -->
+The data used in this paper is obtained from the opendatatoronto library [@opendatatoronto]. The dataset used is Fire Incidents. According to @opendatatoronto, it includes fire incidents as defined by the Ontario Fire Marshal (OFM) up to December 31, 2023. The data gathering and analysis is done in R [@citeR] with the following packages: opendatatoronto [@opendatatoronto], knitr [@knitr], tidyverse [@tidyverse], ggplot2 [@ggplot2], dplyr [@dplyr], and lubridate [@lubridate].
+
+The cleaned data are divided into two groups in accordance to the two most important factors in urban fire incidents: responsiveness of fire department and fire protection equipments, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time and the loss of life or money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipments. All other data features are ignored during the data cleaning process.
+
+The first group of data shows the responsiveness of Toronto Fire Services. An example of this dataset is presented in @tbl-clean-tfs. "Alarm Time" is the time when TFS are notified of the incident. "TFS Arrival time" is the timestamp of first arriving unit. The difference in minute is calculated at the data cleaning step as "TFS Response Time". The number under "Civilian Casualties" indicates the fire related injury or fatality. "Estimated Loss in Dollar" is the estimated loss measured in dollar. 
+
 ```{r}
-#| label: table-clean-tfs
+#| label: tbl-clean-tfs
 #| tbl-cap: Top rows of cleaned Toronto Fire Service response time and loss data
 #| echo: false
 
@@ -102,18 +107,52 @@ head(cleaned_data_tfs, 5) |>
       )
 ```
 
+The second group of data shows the money loss, cause of fire and the presence of fire prevention equipments. @tbl-clean-cat shows the first five rows of the second group of data. "Estimated Loss in Dollar" is the estimated loss measured in dollar. "Area of origin" indicates the area fire originate. "Ignition Source" shows the object causing fire. "Fire Alarm Status", "Smoke Alarm Status" and "Sprinkler System Status" indicates the presence and operation of fire protection equipments.
+
 ```{r}
-#| label: table-clean-cat
+#| label: tbl-clean-cat
 #| tbl-cap: Top rows of cleaned data showing Area of Origin, Ignition source and Fire, Smoke, Sprnkler System Presence.
 #| echo: false
 
 head(cleaned_data_cat, 5) |>
   kable(
-    col.names = c("Area of Origin", "Ignition Source", "Fire Alarm Status"
+    col.names = c("Estimated Loss in Dollar", "Area of Origin", "Ignition Source", "Fire Alarm Status"
     , "Smoke Alarm Status", "Sprinkler System Status"),
       )
+
 cat("Note: 'PO' = System present, \n'N' = System not present, \n'P' = System present but not operated")
 ```
+
+## Toronto Fire Service Responsiveness
+
+```{r}
+#| label: fig-clean-tfs
+#| fig-cap: TFS response time and estimated dollar loss over time
+#| echo: false
+#| fig-subcap: ["TFS response time over time","Estimated dollar loss over time"]
+#| layout-ncol: 2
+
+cleaned_data_tfs |>
+  ggplot(mapping = aes(x = tfs_alarm_time, y = time_diff)) + 
+  geom_line() +
+  theme_minimal() +
+  labs(
+    x = "Alarm Time", y = "Response Time",
+  )
+
+cleaned_data_tfs |>
+  ggplot(mapping = aes(x = tfs_alarm_time, y = estimated_dollar_loss)) + 
+  geom_line() +
+  theme_minimal() +
+  labs(
+    x = "Alarm Time", y = "Estimated dollar loss",
+  )
+```
+
+## Fire Protection Equipments
+
+
+
 
 \newpage
 
@@ -135,10 +174,30 @@ cleaned_data_cat |>
   labs(x = "number of observation", y = "area of origin")
 
 cat("Index of 'Area of Origin':")
-cat(legend$x, sep = "\n")
+cat(legend_origin$x, sep = "\n")
 ```
 
-# Attribution Statement
+\newpage
+
+## Graph of ignition source of fire incidents by number of occurrences {#sec-source-fig}
+
+```{r, fig.width=10,fig.height=11}
+#| label: fig-source
+#| fig-cap: Ignition Source of fire incidents by number of occurrences
+#| echo: false
+
+cleaned_data_cat |>
+  count(ignition_source) |>
+  ggplot(mapping = aes(x = n, y = ignition_source)) +
+  geom_col() + 
+  theme_minimal() + 
+  labs(x = "number of observation", y = "ignition source")
+
+cat("Index of 'Ignition Source':")
+cat(legend_source$x, sep = "\n")
+```
+
+## Attribution Statement
 Contains information licensed under the Open Government Licence – Toronto. 
 Visit: [https://open.toronto.ca/open-data-license/](https://open.toronto.ca/open-data-license/)
 
