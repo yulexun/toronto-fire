@@ -50,7 +50,6 @@ smoke_alarm_at_fire_origin <- sample(c("PO", "N", "p"), n, replace = TRUE)
 sprinkler_system_operation <- sample(c("P", "N", "PO"), n, replace = TRUE)
 
 # Simulate numerical columns
-civilian_casualties <- sample(0:5, n, replace = TRUE)
 estimated_dollar_loss <- sample(0:60000, n, replace = TRUE)
 
 # Create the simulated dataframe
@@ -58,7 +57,6 @@ simulated_data <- data.frame(
   tfs_alarm_time = alarm_times,
   tfs_arrival_time = arrival_times,
   area_of_origin = area_of_origin,
-  civilian_casualties = civilian_casualties,
   estimated_dollar_loss = estimated_dollar_loss,
   extent_of_fire = extent_of_fire,
   fire_alarm_system_presence = fire_alarm_system_presence,

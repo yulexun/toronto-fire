@@ -29,7 +29,6 @@ selected_cleaned_fire_data <-
     tfs_alarm_time,
     tfs_arrival_time,
     area_of_origin,
-    civilian_casualties,
     estimated_dollar_loss,
     extent_of_fire,
     fire_alarm_system_presence,
@@ -73,11 +72,10 @@ selected_cleaned_fire_data <- selected_cleaned_fire_data %>%
     ., "9 - Activation/operation undetermined"
   )))
 
-# Convert columns 'civilian_casualties'
-# and 'estimated_dollar_loss' back to numeric
+# Convert columns
+# 'estimated_dollar_loss' back to numeric
 selected_cleaned_fire_data <- selected_cleaned_fire_data %>%
   mutate(
-    civilian_casualties = as.numeric(civilian_casualties),
     estimated_dollar_loss = as.numeric(estimated_dollar_loss)
   ) %>%
   drop_na() # Remove rows with NA values
