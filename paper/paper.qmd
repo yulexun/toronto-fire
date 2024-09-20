@@ -93,20 +93,6 @@ The data used in this paper is obtained from the opendatatoronto library [@opend
 
 The cleaned data are divided into two groups in accordance to the two most important factors in urban fire incidents: responsiveness of fire department and fire protection equipments, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time and the loss of life or money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipments. All other data features are ignored during the data cleaning process.
 
-The first group of data shows the responsiveness of Toronto Fire Services. An example of this dataset is presented in @tbl-clean-tfs. "Alarm Time" is the time when TFS are notified of the incident. "TFS Arrival time" is the timestamp of first arriving unit. The difference in minute is calculated at the data cleaning step as "TFS Response Time". The number under "Civilian Casualties" indicates the fire related injury or fatality. "Estimated Loss in Dollar" is the estimated loss measured in dollar. 
-
-```{r}
-#| label: tbl-clean-tfs
-#| tbl-cap: Top rows of cleaned Toronto Fire Service response time and loss data
-#| echo: false
-
-head(cleaned_data_tfs, 5) |>
-  kable(
-    col.names = c("Alarm Time", "TFS Arrival Time", "TFS Response Time"
-    , "Civilian Casualties", "Estimated Loss in Dollar"),
-      )
-```
-
 The second group of data shows the money loss, cause of fire and the presence of fire prevention equipments. @tbl-clean-cat shows the first five rows of the second group of data. "Estimated Loss in Dollar" is the estimated loss measured in dollar. "Area of origin" indicates the area fire originate. "Ignition Source" shows the object causing fire. "Fire Alarm Status", "Smoke Alarm Status" and "Sprinkler System Status" indicates the presence and operation of fire protection equipments.
 
 ```{r}
@@ -125,8 +111,24 @@ cat("Note: 'PO' = System present, \n'N' = System not present, \n'P' = System pre
 
 ## Toronto Fire Service Responsiveness
 
+The first group of data shows the responsiveness of Toronto Fire Services. An example of this dataset is presented in @tbl-clean-tfs. "Alarm Time" is the time when TFS are notified of the incident. "TFS Arrival time" is the timestamp of first arriving unit. The difference in minute is calculated at the data cleaning step as "TFS Response Time". The number under "Civilian Casualties" indicates the fire related injury or fatality. "Estimated Loss in Dollar" is the estimated loss measured in dollar. 
+
 ```{r}
-#| label: fig-clean-tfs
+#| label: tbl-clean-tfs
+#| tbl-cap: Top rows of cleaned Toronto Fire Service response time and loss data
+#| echo: false
+
+head(cleaned_data_tfs, 5) |>
+  kable(
+    col.names = c("Alarm Time", "TFS Arrival Time", "TFS Response Time"
+    , "Civilian Casualties", "Estimated Loss in Dollar"),
+      )
+```
+
+@fig-clean-tfs-diff-dollar-time-1 shows the line plot of Toronto Fire Service's response time over the period between 2013 to 2023. 
+
+```{r}
+#| label: fig-clean-tfs-diff-dollar-time
 #| fig-cap: TFS response time and estimated dollar loss over time
 #| echo: false
 #| fig-subcap: ["TFS response time over time","Estimated dollar loss over time"]
@@ -147,6 +149,59 @@ cleaned_data_tfs |>
   labs(
     x = "Alarm Time", y = "Estimated dollar loss",
   )
+
+```
+
+```{r}
+#| label: fig-clean-tfs-boxplot
+#| fig-cap: "Boxplot of TFS response time data and estimated dollar loss"
+#| fig-subcap: ["Boxplot of TFS response time", "Boxplot of estimated dollar loss"]
+#| echo: false
+#| layout-ncol: 2
+
+cleaned_data_tfs |>
+  ggplot(aes(x = "", y = time_diff)) +
+  geom_boxplot() +
+  labs(y = "TFS response time", x = "") + 
+  theme_classic()
+
+cleaned_data_tfs |>
+  ggplot(aes(x = "", y = estimated_dollar_loss)) +
+  geom_boxplot() +
+  labs(y = "Estimated dollar loss", x = "") + 
+  theme_classic()
+
+```
+
+```{r}
+#| label: tbl-clean-tfs-summary
+#| tbl-cap: "Summary Statistic of TFS response time data and estimated dollar loss"
+#| tbl-subcap: ["Summary of TFS response time", "Summary of estimated dollar loss"]
+#| echo: false
+#| layout-ncol: 2
+
+summary_response_time <- 
+  cleaned_data_tfs$time_diff |>
+  summary() |> append(sd(cleaned_data_tfs$time_diff))
+
+summary_response_time <- data.frame(
+  Statistic = c(names(summary(cleaned_data_tfs$time_diff)), "SD"),
+  Value = as.vector(summary_response_time)
+)
+
+kable(summary_response_time, col.names = c("Statistic", "Value"))
+
+summary_dollar_loss <- 
+  cleaned_data_tfs$estimated_dollar_loss |>
+  summary() |> append(sd(cleaned_data_tfs$estimated_dollar_loss))
+
+summary_dollar_loss <- data.frame(
+  Statistic = c(names(summary(cleaned_data_tfs$estimated_dollar_loss)), "SD"),
+  Value = as.vector(summary_dollar_loss)
+)
+
+kable(summary_dollar_loss, col.names = c("Statistic", "Value"))
+
 ```
 
 ## Fire Protection Equipments
