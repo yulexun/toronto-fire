@@ -91,11 +91,11 @@ In this paper we visualize Toronto's Fire Incidents data.
 <!-- Referenced https://github.com/AbbassSleiman/Lead-Concentrations/blob/main/outputs/paper/lead_concentration.pdf for formatting. -->
 The data used in this paper is obtained from the opendatatoronto library [@opendatatoronto]. The dataset used is Fire Incidents. According to @opendatatoronto, it includes fire incidents as defined by the Ontario Fire Marshal (OFM) up to December 31, 2023. The data gathering and analysis is done in R [@citeR] with the following packages: opendatatoronto [@opendatatoronto], knitr [@knitr], tidyverse [@tidyverse], ggplot2 [@ggplot2], dplyr [@dplyr], and lubridate [@lubridate].
 
-The cleaned data are divided into two groups in accordance to the two most important factors in urban fire incidents: responsiveness of fire department and fire protection equipments, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time and the loss of life or money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipments. All other data features are ignored during the data cleaning process.
+The cleaned data are divided into two groups in accordance to the two most important factors in urban fire incidents: responsiveness of fire department and fire protection equipments, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time， extent of fire and the loss of money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipments. All other data features are ignored during the data cleaning process.
 
 ## Toronto Fire Service Responsiveness
 
-The first group of data shows the responsiveness of Toronto Fire Services. An example of this dataset is presented in @tbl-clean-tfs. "Alarm Time" is the time when TFS are notified of the incident. "TFS Arrival time" is the timestamp of first arriving unit. The difference in minute is calculated at the data cleaning step as "TFS Response Time". "Estimated Loss in Dollar" is the estimated loss measured in dollar. 
+The first group of data shows the responsiveness of Toronto Fire Services. An example of this dataset is presented in @tbl-clean-tfs. "Alarm Time" is the time when TFS are notified of the incident. "TFS Arrival time" is the timestamp of first arriving unit. The difference in minute is calculated at the data cleaning step as "TFS Response Time". "Estimated Loss in Dollar" is the estimated loss measured in dollar. "Extent of Fire" is a categorical indicator from "1" to "11" according to the seriousness of the incident.
 
 ```{r}
 #| label: tbl-clean-tfs
