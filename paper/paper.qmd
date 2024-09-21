@@ -45,6 +45,7 @@ cleaned_data_tfs <-
     tfs_arrival_time, 
     time_diff,
     estimated_dollar_loss,
+    extent_of_fire
   )
   
 cleaned_data_cat <-
@@ -103,7 +104,7 @@ The first group of data shows the responsiveness of Toronto Fire Services. An ex
 
 head(cleaned_data_tfs, 5) |>
   kable(
-    col.names = c("Alarm Time", "TFS Arrival Time", "TFS Response Time", "Estimated Loss in Dollar"),
+    col.names = c("Alarm Time", "TFS Arrival Time", "TFS Response Time", "Estimated Loss in Dollar", "Extent of Fire"),
       )
 ```
 
@@ -191,6 +192,38 @@ kable(summary_dollar_loss, col.names = c("Statistic", "Value"))
 
 ```
 
+@fig-bar-extent illustrates that most of the observed fires are relatively small in size. The x-axis depicts the extent of the fire, while the y-axis shows the frequency of observations. A notably tall bar at the start signifies a high occurrence of smaller fires. As fire size increases along the x-axis, the number of observations drops sharply, indicating that larger fires are far less frequent.
+
+```{r}
+#| label: fig-bar-extent
+#| fig-cap: "Distribution of extent of fire"
+#| echo: false
+
+cleaned_data_tfs |>
+  count(extent_of_fire) |>
+  ggplot(mapping = aes(x = extent_of_fire, y = n)) +
+  geom_col() + 
+  theme_minimal() + 
+  labs(x = "extent of fire", y = "number of observation")
+```
+
+@fig-response-vs-money shows a line of best fit, which indicates a weak correlation between TFS response time and estimated dollar loss. There is a wide range of TFS response times for lower dollar losses.
+```{r}
+#| label: fig-response-vs-money
+#| fig-cap: "Line of best fit between TFS response time and dollar loss"
+#| echo: false
+#| warning: false
+#| message: false
+
+cleaned_data_tfs |>
+  ggplot(aes(x = estimated_dollar_loss, y = time_diff)) +
+  geom_jitter() +
+  geom_smooth() +
+  theme_minimal() +
+  labs(x = "Estimated dollar loss", y = "TFS response time")
+
+```
+
 ## Fire Protection Equipments
 
 The second group of data shows the money loss, cause of fire and the presence of fire prevention equipments. @tbl-clean-cat shows the first five rows of the second group of data. "Estimated Loss in Dollar" is the estimated loss measured in dollar. "Area of origin" indicates the area fire originate. "Ignition Source" shows the object causing fire. "Fire Alarm Status", "Smoke Alarm Status" and "Sprinkler System Status" indicates the presence and operation of fire protection equipments. In the second group of data, 'PO' = System present, 'N' = System not present, and 'P' = System present but not operated.
@@ -207,6 +240,60 @@ head(cleaned_data_cat, 5) |>
       )
 ```
 
+@fig-origin in [Appendix A.1](#sec-origin-fig) illustrates the distribution of the fire incidents' area of origin. It consists 71 unique categories. The most common area of origin is category 24, which is cooking area or kitchen. Other common areas include category 64: Porch or Balcony, 22: Sleeping Area or Bedroom, 21: Living Area, and 27: Laundry Area. However, fires in these locations occur significantly less often compared to those in kitchens.
+
+@fig-source in [Appendix A.2](#sec-source-fig) shows the distribution of ignition source in fire incidents. It contains 73 unique categories. The most common ignition source is 11: Stove, Range-top burner and 71: Smoker's Articles. Other common ignition sources include 55: Candle, 43: Clothes Dryer, and 12: Oven. 
+
+```{r}
+#| echo: false
+
+# create dollar loss group
+
+cleaned_data_cat <-
+  cleaned_data_cat |>
+  mutate(
+    categorized_loss =
+      case_when(
+        estimated_dollar_loss < 500 ~ "<500",
+        estimated_dollar_loss < 3000 ~ "500-2,999",
+        estimated_dollar_loss < 15000 ~ "3,000-14,999",
+        estimated_dollar_loss < 100000 ~ "15,000-99,999",
+        estimated_dollar_loss < 3000001 ~ "100,000-3,000,000"
+      ),
+    categorized_loss = 
+      factor(categorized_loss, levels = c("<500", "500-2,999", "3,000-14,999", "15,000-99,999", "100,000-3,000,000"))
+  )
+```
+
+
+```{r}
+#| label: fig-financial-loss-group
+#| fig-cap: "Distribution of financial loss group, and fire prevention system presence"
+#| fig-subcap: ["Distribution of financial loss group, and fire alarm presence", "Distribution of financial loss group, and smoke alarm presence", "Distribution of financial loss group, and sprinkler system presence"]
+#| echo: false
+#| layout-nrow: 2
+#| layout-ncol: 2
+
+cleaned_data_cat |>
+  ggplot(mapping = aes(x = categorized_loss, fill = fire_alarm_system_presence)) +
+  geom_bar() +
+  labs(x = "Financial loss group", y = "Number of observations", fill = "Fire alarm presence") +
+  theme(legend.position = "bottom")
+
+cleaned_data_cat |>
+  ggplot(mapping = aes(x = categorized_loss, fill = smoke_alarm_at_fire_origin)) +
+  geom_bar() +
+  labs(x = "Financial loss group", y = "Number of observations", fill = "Smoke alarm presence") +
+  theme(legend.position = "bottom")
+
+cleaned_data_cat |>
+  ggplot(mapping = aes(x = categorized_loss, fill = sprinkler_system_operation)) +
+  geom_bar() +
+  labs(x = "Financial loss group", y = "Number of observations", fill = "Sprinkler system presence") +
+  theme(legend.position = "bottom")
+```
+
+@fig-financial-loss-group shows the distribution of financial loss in group and the presence of fire prevention system. In @fig-financial-loss-group-1, the graph shows that incidents with no fire alarm system (red bars) is less than incidents with fire alarm system (blue bars). Among the incidents with higher financial loss, there are more cases without fire alarm system. In @fig-financial-loss-group-2, Most of the incidents happen with the smoke alarm present. Among the incidents with lower financial loss, more smoke alarms are present but not operated compared to higher financial loss cases. In @fig-financial-loss-group-3, we can tell that a large proportion of incidents does not have a sprinkler system installed. Among those incidents with sprinkler system present, most of them are not operated.
 
 
 \newpage
