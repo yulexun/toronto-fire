@@ -1,12 +1,12 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Assessing Fire Response Efficiency and the Crucial Role of Protection Systems in Reducing Damage"
+subtitle: "Insights from Toronto’s Fire Incidentsfinal"
 author: 
   - Lexun Yu
 thanks: "Code and data are available at: [https://github.com/yulexun/toronto-fire](https://github.com/yulexun/toronto-fire)."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper analyzes fire incidents in Toronto between 2013 and 2023, focusing on the response times of the Toronto Fire Service (TFS) and the impact of fire protection systems. The study finds that TFS usually responds within 5 to 10 minutes, but the correlation between response time and financial losses is weak, and other factors like fire protection equipment play a larger role in mitigating damage. Fire alarms and sprinkler systems in present and operational reduce losses significantly. This research the importance of maintaining fire protection systems and improving fire service efficiency to enhance urban fire safety."
 format: pdf
 toc: true
 number-sections: true
@@ -82,9 +82,9 @@ Not only do fires in highly populated regions result in heavy losses in terms of
 
 In Canada, articles about fire incidents has a focus on wildfire. For instance, @Goemans2012 discuss the fire mitigation plan during the 2003 wildfire at Kelowna, British Columbia, while @Mamuji2018 talk about the evacuation during the Fort McMurray wildfire in Alberta. The researches conducted about urban fire incidents are done in other parts of the world such as East Asia. @MasoodRafi2012 research the nature and level of this threat. They conclude that the lack of training in fire department, shortage of facilities and infrastructure the major issues in Pakistan. The research by @HariMurti2023 in Semarang City also emphasize the importance of community understanding and the installation of fire protection facilities. This article uses the data provided by opendatatoronto library [@opendatatoronto] in order to analyze fire occurrences in the city of Toronto, which is an important research gap in the study of fire incidents in America. This study seeks to provide a deeper understanding of fire patterns to improve fire prevention and emergency response strategies.
 
-In this paper we visualize Toronto's Fire Incidents data. 
+In this paper we visualize Toronto's Fire Incidents data. The remainder of the paper is structured as follows. [Section 2](#sec-data) discusses the raw and cleaned data, as well as the summary statistic. Then in [Section 2.2](#sec-data-tfs) and [Section 2.3](#sec-data-fpe), We discuss the trend and distribution of TFS response time and fire protection equipment presence. In [Section 3](#sec-discuss), we provide analysis of the trend and correlation in [Section 2](#sec-data), as well as the limitations and future directions in resolving urban fire incidents. 
 
-# Data
+# Data {#sec-data}
 
 ## Overview {#sec-data-overview}
 
@@ -93,7 +93,7 @@ The data used in this paper is obtained from the opendatatoronto library [@opend
 
 The cleaned data are divided into two groups in accordance to the two most important factors in urban fire incidents: responsiveness of fire department and fire protection equipments, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time， extent of fire and the loss of money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipments. All other data features are ignored during the data cleaning process.
 
-## Toronto Fire Service Responsiveness
+## Toronto Fire Service Responsiveness {#sec-data-tfs}
 
 The first group of data shows the responsiveness of Toronto Fire Services. An example of this dataset is presented in @tbl-clean-tfs. "Alarm Time" is the time when TFS are notified of the incident. "TFS Arrival time" is the timestamp of first arriving unit. The difference in minute is calculated at the data cleaning step as "TFS Response Time". "Estimated Loss in Dollar" is the estimated loss measured in dollar. "Extent of Fire" is a categorical indicator from "1" to "11" according to the seriousness of the incident.
 
@@ -224,7 +224,7 @@ cleaned_data_tfs |>
 
 ```
 
-## Fire Protection Equipments
+## Fire Protection Equipments {#sec-data-fpe}
 
 The second group of data shows the money loss, cause of fire and the presence of fire prevention equipments. @tbl-clean-cat shows the first five rows of the second group of data. "Estimated Loss in Dollar" is the estimated loss measured in dollar. "Area of origin" indicates the area fire originate. "Ignition Source" shows the object causing fire. "Fire Alarm Status", "Smoke Alarm Status" and "Sprinkler System Status" indicates the presence and operation of fire protection equipments. In the second group of data, 'PO' = System present, 'N' = System not present, and 'P' = System present but not operated.
 
@@ -295,13 +295,13 @@ cleaned_data_cat |>
 
 @fig-financial-loss-group shows the distribution of financial loss in group and the presence of fire prevention system. In @fig-financial-loss-group-1, the graph shows that incidents with no fire alarm system (red bars) is less than incidents with fire alarm system (blue bars). Among the incidents with higher financial loss, there are more cases without fire alarm system. In @fig-financial-loss-group-2, Most of the incidents happen with the smoke alarm present. Among the incidents with lower financial loss, more smoke alarms are present but not operated compared to higher financial loss cases. In @fig-financial-loss-group-3, we can tell that a large proportion of incidents does not have a sprinkler system installed. Among those incidents with sprinkler system present, most of them are not operated.
 
-# Discussion
+# Discussion {#sec-discuss}
 
 The analysis of Toronto’s fire incident data reveals critical insights into both the responsiveness of the Toronto Fire Service (TFS) and the role of fire protection systems in mitigating financial losses.
 
 ## Toronto Fire Service Responsiveness
 
-The Toronto Fire Service (TFS) generally has efficient response times, averaging about 4.9 minutes, as noted in the summary statistics (@tbl-clean-tfs-summary-1). Over the period from 2013 to 2023, response times varied between 5 and 10 minutes, with some notable outliers, according to @fig-clean-tfs-diff-dollar-time-1. This indicates that while TFS usually responds quickly, there can be occasional delays due to outside factors. Importantly, these response times do not lead to significant financial losses, because the relationship between response time and financial impact is weak, as indicated by @fig-response-vs-money. This implies that for the TFS, rapid response to fire incidents is not the most critical factor. Other elements, such as the severity of the fire and existing fire protection measures, are more decisive in determining the financial consequences of fire events.
+The Toronto Fire Service (TFS) generally has efficient response times, averaging about 4.9 minutes, as noted in the summary statistics [@tbl-clean-tfs-summary-1]. Over the period from 2013 to 2023, response times varied between 5 and 10 minutes, with some notable outliers, according to @fig-clean-tfs-diff-dollar-time-1. This indicates that while TFS usually responds quickly, there can be occasional delays due to outside factors. Importantly, these response times do not lead to significant financial losses, because the relationship between response time and financial impact is weak, as indicated by @fig-response-vs-money. This implies that for the TFS, rapid response to fire incidents is not the most critical factor. Other elements, such as the severity of the fire and existing fire protection measures, are more decisive in determining the financial consequences of fire events.
 
 Financial losses from fire incidents vary greatly, with most cases resulting in low losses, as illustrated in @fig-clean-tfs-diff-dollar-time-2. However, certain outliers, especially from 2015 to 2024, have reported losses exceeding $2 million. This indicates that larger fires occur occasionally, leading to considerable property damage.
 
