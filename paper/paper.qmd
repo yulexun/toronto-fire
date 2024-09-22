@@ -295,6 +295,19 @@ cleaned_data_cat |>
 
 @fig-financial-loss-group shows the distribution of financial loss in group and the presence of fire prevention system. In @fig-financial-loss-group-1, the graph shows that incidents with no fire alarm system (red bars) is less than incidents with fire alarm system (blue bars). Among the incidents with higher financial loss, there are more cases without fire alarm system. In @fig-financial-loss-group-2, Most of the incidents happen with the smoke alarm present. Among the incidents with lower financial loss, more smoke alarms are present but not operated compared to higher financial loss cases. In @fig-financial-loss-group-3, we can tell that a large proportion of incidents does not have a sprinkler system installed. Among those incidents with sprinkler system present, most of them are not operated.
 
+# Discussion
+
+The analysis of Toronto’s fire incident data reveals critical insights into both the responsiveness of the Toronto Fire Service (TFS) and the role of fire protection systems in mitigating financial losses.
+
+## Toronto Fire Service Responsiveness
+
+The TFS's response times remain generally efficient, with an average time of approximately 4.9 minutes, as reflected in the summary statistics (@tbl-clean-tfs-summary-1). The response time fluctuated between 5 to 10 minutes over the 2013–2023 period, with some significant outliers, according to @fig-clean-tfs-diff-dollar-time-1. This suggests that while TFS generally responds swiftly, occasional delays may occur due to external factors. The response time does not lead to more financial loss, because this correlation is weak, as indicated by @fig-response-vs-money. This weak correlation suggests that it does not matter a lot for the Toronto Fire Service to react to fire incident very quickly. Other factors, such as the extent of the fire and fire protection measures in place, play a more critical role in determining the financial impact of fire incidents.
+
+The financial loss associated with fire incidents shows a wide range, with most incidents resulting in minimal losses, as shown in @fig-clean-tfs-diff-dollar-time-2. However, some outliers, particularly between 2015 and 2024, saw losses exceeding $2 million. This suggests that there are rare instances where larger fires occur occasionally, resulting in substantial property damage.
+
+## Impact of Fire Protection Equipment
+
+
 
 \newpage
 
