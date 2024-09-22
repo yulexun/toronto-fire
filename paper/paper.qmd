@@ -301,13 +301,22 @@ The analysis of Toronto’s fire incident data reveals critical insights into bo
 
 ## Toronto Fire Service Responsiveness
 
-The TFS's response times remain generally efficient, with an average time of approximately 4.9 minutes, as reflected in the summary statistics (@tbl-clean-tfs-summary-1). The response time fluctuated between 5 to 10 minutes over the 2013–2023 period, with some significant outliers, according to @fig-clean-tfs-diff-dollar-time-1. This suggests that while TFS generally responds swiftly, occasional delays may occur due to external factors. The response time does not lead to more financial loss, because this correlation is weak, as indicated by @fig-response-vs-money. This weak correlation suggests that it does not matter a lot for the Toronto Fire Service to react to fire incident very quickly. Other factors, such as the extent of the fire and fire protection measures in place, play a more critical role in determining the financial impact of fire incidents.
+The Toronto Fire Service (TFS) generally has efficient response times, averaging about 4.9 minutes, as noted in the summary statistics (@tbl-clean-tfs-summary-1). Over the period from 2013 to 2023, response times varied between 5 and 10 minutes, with some notable outliers, according to @fig-clean-tfs-diff-dollar-time-1. This indicates that while TFS usually responds quickly, there can be occasional delays due to outside factors. Importantly, these response times do not lead to significant financial losses, because the relationship between response time and financial impact is weak, as indicated by @fig-response-vs-money. This implies that for the TFS, rapid response to fire incidents is not the most critical factor. Other elements, such as the severity of the fire and existing fire protection measures, are more decisive in determining the financial consequences of fire events.
 
-The financial loss associated with fire incidents shows a wide range, with most incidents resulting in minimal losses, as shown in @fig-clean-tfs-diff-dollar-time-2. However, some outliers, particularly between 2015 and 2024, saw losses exceeding $2 million. This suggests that there are rare instances where larger fires occur occasionally, resulting in substantial property damage.
+Financial losses from fire incidents vary greatly, with most cases resulting in low losses, as illustrated in @fig-clean-tfs-diff-dollar-time-2. However, certain outliers, especially from 2015 to 2024, have reported losses exceeding $2 million. This indicates that larger fires occur occasionally, leading to considerable property damage.
 
 ## Impact of Fire Protection Equipment
+The presence and operation of fire protection equipment, particularly alarms and sprinklers, had a noticeable effect on financial losses. According to @fig-financial-loss-group, incidents where fire alarms were absent or failed to operate resulted in higher financial losses. This is consistent with previous researched carried out including the one conducted by @HariMurti2023 which further corroborates the studies that the absence of effective fire prevention systems makes the aftermath of fire destruction more damaging. SAdditionally, the data reveal that while smoke alarms were present in most cases, sprinklers were often absent or not operational. This underlines the importance of incorporating sprinkler systems particularly in these areas where most fire outbreaks are recorded such as kitchens in accordance with statistics.
 
+The results also indicate that there are other factors such as the location of the fire’s ignition and its sources that are critical in determining the outcome. According to @fig-origin and @fig-source, kitchens and living rooms are the most common areas where fires start with most cases arising from stovetops and smokers’ articles being the most common. Such information makes it evident that fire outbreak should be prevented by targeting those measures in these severe areas. For instance fire incidents would be reduced considerable alongside its severity by making people understand the dangers of kitchen fires and the need to manage sprinkler and smoke alarm systems so that they do not malfunction.
 
+## Future Directions and Limitations
+
+This assessment is of great importance in the context of fire prevention and emergency response plans in the city of Toronto. First of all, the response times from TFS, apart from being fairly constant, also fluctuate at times, justifying the strategy that more improvements in the fire service will be in order in particular areas where there are delays. Furthermore, the data emphasize the great importance of fire protection systems in decreases in losses and the necessity of not only having fire protection systems in place but having them in working order as well.
+
+There are a few limitations on this research. First, there are other factors affecting TFS response time, such as local extreme weather or traffic. The response time data may not show the full picture of TFS's responsiveness. Second, the presence of fire protection equipment is oversimplified in the dataset. It is grouped to only three main categories. The state of fire alarm, smoke alarm and sprinkler system has to be analyzed more thoughtfully during the data collection process for a more useful analysis. 
+
+Overall, this analysis contributes to a deeper understanding of fire risks in urban environments and supports the development of targeted interventions aimed at minimizing fire-related damages.
 
 \newpage
 
@@ -356,5 +365,7 @@ cat(legend_source$x, sep = "\n")
 Contains information licensed under the Open Government Licence – Toronto. 
 Visit: [https://open.toronto.ca/open-data-license/](https://open.toronto.ca/open-data-license/)
 
+
 \newpage
+
 # Bibliography
