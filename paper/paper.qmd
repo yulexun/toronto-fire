@@ -1,6 +1,6 @@
 ---
 title: "Assessing Fire Response Efficiency and the Crucial Role of Protection Systems in Reducing Damage"
-subtitle: "Insights from Toronto’s Fire Incidentsfinal"
+subtitle: "Insights from Toronto’s Fire Incidents"
 author: 
   - Lexun Yu
 thanks: "Code and data are available at: [https://github.com/yulexun/toronto-fire](https://github.com/yulexun/toronto-fire)."
