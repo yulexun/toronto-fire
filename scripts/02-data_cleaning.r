@@ -179,7 +179,7 @@ cleaned_fire_data_simple <-
   cleaned_fire_data_simple |>
   mutate(
     ignition_source =
-      substr(ignition_source, start = 1, stop = 2)
+      substr(ignition_source, start = 1, stop = 3)
   )
 
 # Write the cleaned data to a new csv
