@@ -56,6 +56,7 @@
 "73 - Parking Area, Parking Lot"
 "74 - Storage Area (outside)"
 "75 - Trash, rubbish area (outside)"
+"76 - Fuel Dispensing Area (outside)"
 "78 - Attached Deck"
 "79 - Other Outside Area"
 "81 - Engine Area"
