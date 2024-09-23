@@ -26,4 +26,4 @@ You can run
 ```sh
 renv::restore()
 ```
-to restore the R project workspace. The old .Rproj file seems deprecated according to [this Github Issue](https://github.com/posit-dev/positron/discussions/3967)
+to restore the R project workspace in Positron. I also included a .Rproj file for RStudio users. For more information, see [this Github Issue](https://github.com/posit-dev/positron/discussions/3967)
