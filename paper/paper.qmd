@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: [https://github.com/yulexun/toronto-fire](https://github.com/yulexun/toronto-fire)."
 date: today
 date-format: long
-abstract: "This paper analyzes fire incidents in Toronto between 2013 and 2023, focusing on the response times of the Toronto Fire Service (TFS) and the impact of fire protection systems. The study finds that TFS usually responds within 5 to 10 minutes, but the correlation between response time and financial losses is weak, and other factors like fire protection equipment play a larger role in mitigating damage. Fire alarms and sprinkler systems in present and operational reduce losses significantly. This research the importance of maintaining fire protection systems and improving fire service efficiency to enhance urban fire safety."
+abstract: "This paper analyzes fire incidents in Toronto between 2013 and 2023, focusing on the response times of the Toronto Fire Service (TFS) and the impact of fire protection systems. The study finds that TFS usually responds within 5 to 10 minutes, but the correlation between response time and economic losses is weak, and other factors like fire protection equipment play a larger role in mitigating damage. Fire alarms and sprinkler systems in present and operational reduce losses significantly. This research the importance of maintaining fire protection systems and improving fire service efficiency to enhance urban fire safety."
 format: pdf
 toc: true
 number-sections: true
@@ -77,12 +77,12 @@ cleaned_data_cat <-
 ```
 
 # Introduction {#sec-intro}
-The urban fire hazard is one of the most pressing issues in this context, especially in Canada where cities are dealing with such issues like climate, facilities or population density. As of July 1 2023, the population in urban area in Canada reached 33,812,133 [@statsCanada]. 
-Not only do fires in highly populated regions result in heavy losses in terms of property, but also, in the contest of people and the environment, the consequences are enormous. Also, urban fires are resources-dependent and require attention from city services and emergency services, thus indicating the need for prevention, action and planning based on risk assessment. With such issues in mind, the knowledge of urban fire hazards in Canadian cities is needed for creating policies that address public safety and increase urban resilience.
+The urban fire hazard is one of the most pressing issues in this context, especially in Canada where cities are dealing with such issues like climate, facilities, or population density. As of July 1, 2023, the population in urban area in Canada reached 33,812,133 [@statsCanada]. 
+Not only do fires in highly populated regions result in heavy losses in terms of property, but also, in the context of people and the environment, the consequences are enormous. Also, urban fires are resource-dependent and require attention from city services and emergency services, thus indicating the need for prevention, action and planning based on risk assessment. With such issues in mind, the knowledge of urban fire hazards in Canadian cities is needed for creating policies that address public safety and increase urban resilience.
 
-In Canada, articles about fire incidents has a focus on wildfire. For instance, @Goemans2012 discuss the fire mitigation plan during the 2003 wildfire at Kelowna, British Columbia, while @Mamuji2018 talk about the evacuation during the Fort McMurray wildfire in Alberta. The researches conducted about urban fire incidents are done in other parts of the world such as East Asia. @MasoodRafi2012 research the nature and level of this threat. They conclude that the lack of training in fire department, shortage of facilities and infrastructure the major issues in Pakistan. The research by @HariMurti2023 in Semarang City also emphasize the importance of community understanding and the installation of fire protection facilities. This article uses the data provided by opendatatoronto library [@opendatatoronto] in order to analyze fire occurrences in the city of Toronto, which is an important research gap in the study of fire incidents in America. This study seeks to provide a deeper understanding of fire patterns to improve fire prevention and emergency response strategies.
+In Canada, articles about fire incidents have a focus on wildfire. For instance, @Goemans2012 discuss the fire mitigation plan during the 2003 wildfire at Kelowna, British Columbia, while @Mamuji2018 talk about the evacuation during the Fort McMurray wildfire in Alberta. Research conducted about urban fire incidents is done in other parts of the world such as East Asia. @MasoodRafi2012 research the nature and level of this threat. They conclude that the lack of training in fire department, shortage of facilities and infrastructure the key issues in Pakistan. The research by @HariMurti2023 in Semarang City also emphasizes the importance of community understanding and the installation of fire protection facilities. This article uses the data provided by opendatatoronto library [@opendatatoronto] to analyze fire occurrences in the city of Toronto, which is an important research gap in the study of fire incidents in America. This study seeks to provide a deeper understanding of fire patterns to improve fire prevention and emergency response strategies.
 
-In this paper we visualize Toronto's Fire Incidents data. The remainder of the paper is structured as follows. @sec-data discusses the raw and cleaned data, as well as the summary statistic. Then in @sec-data-tfs and @sec-data-fpe, We discuss the trend and distribution of TFS response time and fire protection equipment presence. In @sec-discuss, we provide analysis of the trend and correlation in @sec-data, as well as the limitations and future directions in resolving urban fire incidents. 
+In this paper we visualize Toronto's Fire Incidents data. The remainder of the paper is structured as follows. @sec-data discusses the raw and cleaned data, as well as the summary statistic. Then in @sec-data-tfs and @sec-data-fpe, we discuss the trend and distribution of TFS response time and fire protection equipment presence. In @sec-discuss, we provide analysis of the trend and correlation in @sec-data, as well as the limitations and future directions in resolving urban fire incidents. 
 
 # Data {#sec-data}
 
@@ -91,11 +91,11 @@ In this paper we visualize Toronto's Fire Incidents data. The remainder of the p
 <!-- Referenced https://github.com/AbbassSleiman/Lead-Concentrations/blob/main/outputs/paper/lead_concentration.pdf for formatting. -->
 The data used in this paper is obtained from the opendatatoronto library [@opendatatoronto]. The dataset used is Fire Incidents. According to @opendatatoronto, it includes fire incidents as defined by the Ontario Fire Marshal (OFM) up to December 31, 2023. The data gathering and analysis is done in R [@citeR] with the following packages: opendatatoronto [@opendatatoronto], knitr [@knitr], tidyverse [@tidyverse], ggplot2 [@ggplot2], dplyr [@dplyr], and lubridate [@lubridate].
 
-The cleaned data are divided into two groups in accordance to the two most important factors in urban fire incidents: responsiveness of fire department and fire protection equipments, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time， extent of fire and the loss of money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipments. All other data features are ignored during the data cleaning process.
+The cleaned data are divided into two groups in accordance with the two most crucial factors in urban fire incidents: responsiveness of fire department and fire protection equipment, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time, extent of fire and the loss of money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipment. All other data features are ignored during the data cleaning process.
 
 ## Toronto Fire Service Responsiveness {#sec-data-tfs}
 
-The first group of data shows the responsiveness of Toronto Fire Services. An example of this dataset is presented in @tbl-clean-tfs. "Alarm Time" is the time when TFS are notified of the incident. "TFS Arrival time" is the timestamp of first arriving unit. The difference in minute is calculated at the data cleaning step as "TFS Response Time". "Estimated Loss in Dollar" is the estimated loss measured in dollar. "Extent of Fire" is a categorical indicator from "1" to "11" according to the seriousness of the incident.
+The first group of data shows the responsiveness of Toronto Fire Services. An example of this dataset is presented in @tbl-clean-tfs. "Alarm Time" is the time when TFS are notified of the incident. "TFS Arrival time" is the timestamp of the first arriving unit. The difference in minute is calculated at the data cleaning step as "TFS Response Time". "Estimated Loss in Dollars" is the estimated loss measured in dollars. "Extent of Fire" is a categorical indicator from "1" to "11" according to the seriousness of the incident.
 
 ```{r}
 #| label: tbl-clean-tfs
@@ -104,11 +104,11 @@ The first group of data shows the responsiveness of Toronto Fire Services. An ex
 
 head(cleaned_data_tfs, 5) |>
   kable(
-    col.names = c("Alarm Time", "TFS Arrival Time", "TFS Response Time", "Estimated Loss in Dollar", "Extent of Fire"),
+    col.names = c("Alarm Time", "TFS Arrival Time", "TFS Response Time", "Estimated Loss in Dollars", "Extent of Fire"),
       )
 ```
 
-@fig-clean-tfs-diff-dollar-time-1 shows the line plot of Toronto Fire Service's response time over the period between 2013 to 2023. The response time fluctuated around a relatively consistent level, typically between 5 and 10 minutes, with occasional spikes where the response time increased significantly above the usual range, particularly around 2014 and 2019. @fig-clean-tfs-diff-dollar-time-2 shows the line plot of estimated dollar loss of the fire incidents. Most of the incidents resulted in relatively low dollar losses, but there are several spikes that represent incidents where the loss was significantly higher. Some of the most notable spikes occurred between 2015 and 2019, with losses exceeding 2 million dollars.
+@fig-clean-tfs-diff-dollar-time-1 shows the line plot of Toronto Fire Service's response time over the period between 2013 to 2023. The response time fluctuated around a consistent level, typically between 5 and 10 minutes, with occasional spikes where the response time increased significantly above the usual range, particularly around 2014 and 2019. @fig-clean-tfs-diff-dollar-time-2 shows the line plot of estimated dollar loss of the fire incidents. Most of the incidents resulted in low dollar losses, but there are several spikes that represent incidents where the loss was significantly higher. Some of the most notable spikes occurred between 2015 and 2019, with losses exceeding 2 million dollars.
 
 
 
@@ -136,9 +136,9 @@ cleaned_data_tfs |>
   )
 ```
 
-@tbl-clean-tfs-summary-1 indicates the summary statistic and @fig-clean-tfs-boxplot-1 graphs the boxplot of TFS's response time. The value mainly range from 4.03 minutes to 5.7 minutes as shown in @tbl-clean-tfs-summary-1, with a mean value of 4.911868 minutes. Notably, in @fig-clean-tfs-boxplot-1, several outliers are indicated by dots above the upper whisker, suggesting occasional instances of significantly higher response times. 
+@tbl-clean-tfs-summary-1 indicates the summary statistic and @fig-clean-tfs-boxplot-1 graphs the boxplot of TFS's response time. The value ranges from 4.03 minutes to 5.7 minutes as shown in @tbl-clean-tfs-summary-1, with a mean value of 4.911868 minutes. Notably, in @fig-clean-tfs-boxplot-1, several outliers are indicated by dots above the upper whisker, suggesting occasional instances of significantly higher response times. 
 
-@tbl-clean-tfs-summary-2 indicates the summary statistic and @fig-clean-tfs-boxplot-2 depicts the distribution of financial losses in boxplot. In @tbl-clean-tfs-summary-2, values span from 0 dollar to over 3000000 dollars, with median value of 3000 dollars, mean value of 24551.64 dollars and standard deviation of 93520.08 dollars, indicating a skewed distribution. @fig-clean-tfs-boxplot-2 reveals numerous outliers above the upper whisker, highlighting instances of exceptionally high financial losses.
+@tbl-clean-tfs-summary-2 indicates the summary statistic and @fig-clean-tfs-boxplot-2 depicts the distribution of economic losses in boxplot. In @tbl-clean-tfs-summary-2, values span from 0 dollar to over 3000000 dollars, with median value of 3000 dollars, mean value of 24551.64 dollars and standard deviation of 93520.08 dollars, indicating a skewed distribution. @fig-clean-tfs-boxplot-2 reveals numerous outliers above the upper whisker, highlighting instances of exceptionally high economic losses.
 
 ```{r}
 #| label: fig-clean-tfs-boxplot
@@ -192,7 +192,7 @@ kable(summary_dollar_loss, col.names = c("Statistic", "Value"))
 
 ```
 
-@fig-bar-extent illustrates that most of the observed fires are relatively small in size. The x-axis depicts the extent of the fire, while the y-axis shows the frequency of observations. A notably tall bar at the start signifies a high occurrence of smaller fires. As fire size increases along the x-axis, the number of observations drops sharply, indicating that larger fires are far less frequent.
+@fig-bar-extent illustrates that most of the observed fires are relatively small. The x-axis depicts the extent of the fire, while the y-axis shows the frequency of observations. A notably tall bar at the start signifies a high occurrence of smaller fires. As fire size increases along the x-axis, the number of observations drops sharply, indicating that larger fires are far less frequent.
 
 ```{r}
 #| label: fig-bar-extent
@@ -226,7 +226,7 @@ cleaned_data_tfs |>
 
 ## Fire Protection Equipments {#sec-data-fpe}
 
-The second group of data shows the money loss, cause of fire and the presence of fire prevention equipments. @tbl-clean-cat shows the first five rows of the second group of data. "Estimated Loss in Dollar" is the estimated loss measured in dollar. "Area of origin" indicates the area fire originate. "Ignition Source" shows the object causing fire. "Fire Alarm Status", "Smoke Alarm Status" and "Sprinkler System Status" indicates the presence and operation of fire protection equipments. In the second group of data, 'PO' = System present, 'N' = System not present, and 'P' = System present but not operated.
+The second group of data shows the money loss, cause of fire and the presence of fire prevention equipment. @tbl-clean-cat shows the first five rows of the second group of data. "Estimated Loss in Dollars" is the estimated loss measured in dollars. "Area of origin" indicates the area fire originates. "Ignition Source" shows the object causing fire. "Fire Alarm Status", "Smoke Alarm Status" and "Sprinkler System Status" indicate the presence and operation of fire protection equipment. In the second group of data, 'PO' = System present, 'N' = System not present, and 'P' = System present but not operated.
 
 ```{r}
 #| label: tbl-clean-cat
@@ -235,12 +235,12 @@ The second group of data shows the money loss, cause of fire and the presence of
 
 head(cleaned_data_cat, 5) |>
   kable(
-    col.names = c("Estimated Loss in Dollar", "Area of Origin", "Ignition Source", "Fire Alarm Status"
+    col.names = c("Estimated Loss in Dollars", "Area of Origin", "Ignition Source", "Fire Alarm Status"
     , "Smoke Alarm Status", "Sprinkler System Status"),
       )
 ```
 
-@fig-origin in [Appendix A.1](#sec-origin-fig) illustrates the distribution of the fire incidents' area of origin. It consists 71 unique categories. The most common area of origin is category 24, which is cooking area or kitchen. Other common areas include category 64: Porch or Balcony, 22: Sleeping Area or Bedroom, 21: Living Area, and 27: Laundry Area. However, fires in these locations occur significantly less often compared to those in kitchens.
+@fig-origin in [Appendix A.1](#sec-origin-fig) illustrates the distribution of the fire incidents' area of origin. It consists of 71 unique categories. The most common area of origin is category 24, which is cooking area or kitchen. Other common areas include category 64: Porch or Balcony, 22: Sleeping Area or Bedroom, 21: Living Area, and 27: Laundry Area. However, fires in these locations occur significantly less often compared to those in kitchens.
 
 @fig-source in [Appendix A.2](#sec-source-fig) shows the distribution of ignition source in fire incidents. It contains 73 unique categories. The most common ignition source is 11: Stove, Range-top burner and 71: Smoker's Articles. Other common ignition sources include 55: Candle, 43: Clothes Dryer, and 12: Oven. 
 
@@ -268,8 +268,8 @@ cleaned_data_cat <-
 
 ```{r}
 #| label: fig-financial-loss-group
-#| fig-cap: "Distribution of financial loss group, and fire prevention system presence"
-#| fig-subcap: ["Distribution of financial loss group, and fire alarm presence", "Distribution of financial loss group, and smoke alarm presence", "Distribution of financial loss group, and sprinkler system presence"]
+#| fig-cap: "Distribution of economic loss group, and fire prevention system presence"
+#| fig-subcap: ["Distribution of economic loss group, and fire alarm presence", "Distribution of economic loss group, and smoke alarm presence", "Distribution of economic loss group, and sprinkler system presence"]
 #| echo: false
 #| layout-nrow: 2
 #| layout-ncol: 2
@@ -293,30 +293,30 @@ cleaned_data_cat |>
   theme(legend.position = "bottom")
 ```
 
-@fig-financial-loss-group shows the distribution of financial loss in group and the presence of fire prevention system. In @fig-financial-loss-group-1, the graph shows that incidents with no fire alarm system (red bars) is less than incidents with fire alarm system (blue bars). Among the incidents with higher financial loss, there are more cases without fire alarm system. In @fig-financial-loss-group-2, Most of the incidents happen with the smoke alarm present. Among the incidents with lower financial loss, more smoke alarms are present but not operated compared to higher financial loss cases. In @fig-financial-loss-group-3, we can tell that a large proportion of incidents does not have a sprinkler system installed. Among those incidents with sprinkler system present, most of them are not operated.
+@fig-financial-loss-group shows the distribution of grouped economic loss and the presence of fire prevention system. In @fig-financial-loss-group-1, the graph shows that incidents with no fire alarm system (red bars) are less than incidents with fire alarm system (blue bars). Among the incidents with higher economic loss, there are more cases without a fire alarm system. In @fig-financial-loss-group-2, Most of the incidents happen with the smoke alarm present. Among the incidents with lower economic loss, more smoke alarms are present but not operated compared to higher economic loss cases. In @fig-financial-loss-group-3, we can tell that a substantial proportion of incidents does not have a sprinkler system installed. Among those incidents with sprinkler system present, most of them are not operated.
 
 # Discussion {#sec-discuss}
 
-The analysis of Toronto’s fire incident data reveals critical insights into both the responsiveness of the Toronto Fire Service (TFS) and the role of fire protection systems in mitigating financial losses.
+The analysis of Toronto’s fire incident data reveals critical insights into both the responsiveness of the Toronto Fire Service (TFS) and the role of fire protection systems in mitigating economic losses.
 
 ## Toronto Fire Service Responsiveness
 
-The Toronto Fire Service (TFS) generally has efficient response times, averaging about 4.9 minutes, as noted in the summary statistics [@tbl-clean-tfs-summary-1]. Over the period from 2013 to 2023, response times varied between 5 and 10 minutes, with some notable outliers, according to @fig-clean-tfs-diff-dollar-time-1. This indicates that while TFS usually responds quickly, there can be occasional delays due to outside factors. Importantly, these response times do not lead to significant financial losses, because the relationship between response time and financial impact is weak, as indicated by @fig-response-vs-money. This implies that for the TFS, rapid response to fire incidents is not the most critical factor. Other elements, such as the severity of the fire and existing fire protection measures, are more decisive in determining the financial consequences of fire events.
+The Toronto Fire Service (TFS) has efficient response times, averaging about 4.9 minutes, as noted in the summary statistics [@tbl-clean-tfs-summary-1]. Over the period from 2013 to 2023, response times varied between 5 and 10 minutes, with some notable outliers, according to @fig-clean-tfs-diff-dollar-time-1. This indicates that while TFS usually responds quickly, there can be occasional delays due to outside factors. Importantly, these response times do not lead to significant economic losses, because the relationship between response time and economical impact is weak, as indicated by @fig-response-vs-money. This implies that for the TFS, rapid response to fire incidents is not the most critical factor. Other elements, such as the severity of the fire and existing fire protection measures, are more decisive in determining the financial consequences of fire events.
 
-Financial losses from fire incidents vary greatly, with most cases resulting in low losses, as illustrated in @fig-clean-tfs-diff-dollar-time-2. However, certain outliers, especially from 2015 to 2024, have reported losses exceeding $2 million. This indicates that larger fires occur occasionally, leading to considerable property damage.
+Financial losses from fire incidents vary, with most cases resulting in low losses, as illustrated in @fig-clean-tfs-diff-dollar-time-2. However, certain outliers, especially from 2015 to 2024, have reported losses exceeding $2 million. This indicates that larger fires occur occasionally, leading to considerable property damage.
 
 ## Impact of Fire Protection Equipment
-The presence and operation of fire protection equipment, particularly alarms and sprinklers, had a noticeable effect on financial losses. According to @fig-financial-loss-group, incidents where fire alarms were absent or failed to operate resulted in higher financial losses. This is consistent with previous researched carried out including the one conducted by @HariMurti2023 which further corroborates the studies that the absence of effective fire prevention systems makes the aftermath of fire destruction more damaging. SAdditionally, the data reveal that while smoke alarms were present in most cases, sprinklers were often absent or not operational. This underlines the importance of incorporating sprinkler systems particularly in these areas where most fire outbreaks are recorded such as kitchens in accordance with statistics.
+The presence and operation of fire protection equipment, particularly alarms and sprinklers, had a noticeable effect on economic losses. According to @fig-financial-loss-group, incidents where fire alarms were absent or failed to operate resulted in higher economic losses. This is consistent with previous research carried out including the one conducted by @HariMurti2023 which further corroborates the studies that the absence of effective fire prevention systems makes the aftermath of fire destruction more damaging. Additionally, the data reveals that while smoke alarms were present in most cases, sprinklers were often absent or not operational. This underlines the importance of incorporating sprinkler systems particularly in these areas where most fire outbreaks are recorded such as kitchens in accordance with statistics.
 
-The results also indicate that there are other factors such as the location of the fire’s ignition and its sources that are critical in determining the outcome. According to @fig-origin and @fig-source, kitchens and living rooms are the most common areas where fires start with most cases arising from stovetops and smokers’ articles being the most common. Such information makes it evident that fire outbreak should be prevented by targeting those measures in these severe areas. For instance fire incidents would be reduced considerable alongside its severity by making people understand the dangers of kitchen fires and the need to manage sprinkler and smoke alarm systems so that they do not malfunction.
+The results also indicate that there are other factors such as the location of the fire’s ignition and its sources that are critical in determining the outcome. According to @fig-origin and @fig-source, kitchens and living rooms are the most common areas where fires start with most cases arising from stovetops and smokers’ articles being the most common. Such information makes it evident that fire outbreaks should be prevented by targeting those measures in these severe areas. For instance, fire incidents would be reduced considerably alongside its severity by making people understand the dangers of kitchen fires and the need to manage sprinkler and smoke alarm systems so that they do not malfunction.
 
 ## Future Directions and Limitations
 
-This assessment is of great importance in the context of fire prevention and emergency response plans in the city of Toronto. First of all, the response times from TFS, apart from being fairly constant, also fluctuate at times, justifying the strategy that more improvements in the fire service will be in order in particular areas where there are delays. Furthermore, the data emphasize the great importance of fire protection systems in decreases in losses and the necessity of not only having fire protection systems in place but having them in working order as well.
+This assessment is important in the context of fire prevention and emergency response plans in Toronto. First, the response times from TFS, apart from being fairly constant, also fluctuate at times, justifying the strategy that more improvements in the fire service will be in order in particular areas where there are delays. Furthermore, the data emphasize the importance of fire protection systems in decreases in losses and the necessity of not only having fire protection systems in place but having them in working order as well.
 
-There are a few limitations on this research. First, there are other factors affecting TFS response time, such as local extreme weather or traffic. The response time data may not show the full picture of TFS's responsiveness. Second, the presence of fire protection equipment is oversimplified in the dataset. It is grouped to only three main categories. The state of fire alarm, smoke alarm and sprinkler system has to be analyzed more thoughtfully during the data collection process for a more useful analysis. 
+There are a few limitations to this research. First, there are other factors affecting TFS response time, such as extreme local weather or traffic. The response time data may not show the full picture of TFS's responsiveness. Second, the presence of fire protection equipment is oversimplified in the dataset. It is grouped into only three main categories. The state of fire alarm, smoke alarm and sprinkler system have to be analyzed more thoughtfully during the data collection process for a more useful analysis. 
 
-Overall, this analysis contributes to a deeper understanding of fire risks in urban environments and supports the development of targeted interventions aimed at minimizing fire-related damages.
+Overall, this analysis contributes to a deeper understanding of fire risks in urban environments and supports the development of targeted interventions aimed at minimizing fire-related damage.
 
 \newpage
 
