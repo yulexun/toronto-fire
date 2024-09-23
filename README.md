@@ -21,7 +21,7 @@ Some of the code are written with help of ChatGPT and the entire chat history is
 
 ## Note
 
-This R project is setup with Positron. The properties of this project is stored in `/renv/settings.json`.
+This R project is setup with Positron, which is demonstrated in Lecture 1. The properties of this project is stored in `/renv/settings.json`.
 You can run 
 ```sh
 renv::restore()
