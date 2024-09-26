@@ -91,7 +91,7 @@ In this paper we visualize Toronto's Fire Incidents data. The remainder of the p
 <!-- Referenced https://github.com/AbbassSleiman/Lead-Concentrations/blob/main/outputs/paper/lead_concentration.pdf for formatting. -->
 The data used in this paper is obtained from the opendatatoronto library [@opendatatoronto]. The dataset used is Fire Incidents. According to @opendatatoronto, it includes fire incidents as defined by the Ontario Fire Marshal (OFM) up to December 31, 2023. The data gathering and analysis is done in R [@citeR] with the following packages: opendatatoronto [@opendatatoronto], knitr [@knitr], tidyverse [@tidyverse], ggplot2 [@ggplot2], dplyr [@dplyr], and lubridate [@lubridate].
 
-The cleaned data are divided into two groups in accordance with the two most crucial factors in urban fire incidents: responsiveness of fire department and fire protection equipment, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time, extent of fire and the loss of money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipment. All other data features are ignored during the data cleaning process.
+The data cleaning process is recorded in @sec-datacleaning. The cleaned data are divided into two groups in accordance with the two most crucial factors in urban fire incidents: responsiveness of fire department and fire protection equipment, as indicated by @HariMurti2023 and @MasoodRafi2012. The first group focuses on the fire services' response time, extent of fire and the loss of money, and the second group focuses on the loss of money, reason of fire incidents and the presence or operation of fire protection equipment. All other data features are ignored during the data cleaning process.
 
 ## Toronto Fire Service Responsiveness {#sec-data-tfs}
 
@@ -360,6 +360,10 @@ cleaned_data_cat |>
 cat("Index of 'Ignition Source':")
 cat(legend_source$x, sep = "\n")
 ```
+
+## Data Cleaning {#sec-datacleaning}
+
+The data cleaning process starts with only keeping relavant data to this research. The first step keeps only the columns related to TFS response time, financial loss and the extenr or metadata of the fire incidents. Third, we identify and categorize all undetermined and invalid entries in the "Area of Origin" and "Ignition Source" columns that cannot be grouped. Forth, all columns related to time and money are converted to numeric value. The TFS response time is calculated by subtracting the fire incident report time from the TFS arrival time. Lastly, the categorical data are simplified to indicators such as "1", "12", "P" and "PO" to reduce the length in character of the dataset. 
 
 ## Attribution Statement
 Contains information licensed under the Open Government Licence – Toronto. 
